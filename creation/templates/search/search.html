@@ -1,0 +1,9 @@
+<div class="d-flex justify-content-end m-4">
+    <input type="text" 
+    hx-get="{% url 'search_keywords' %}"
+    hx-target='#results'
+    hx-trigger="keyup changed delay:500ms"
+    name="search" placeholder="Search...">
+    </form>
+</div>
+<div id="results" class="mb-4"></div>

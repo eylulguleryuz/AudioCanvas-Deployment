@@ -1,0 +1,47 @@
+
+{% if creation_infos %}
+<div class="dropdown mb-2">
+    <a class="btn btn-light dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        Sort by
+    </a>
+    <ul class="dropdown-menu p-2">
+        <li><a href="{% url 'sort_profile' %}?sort=starred" class="dropdown-item text-dark" hx-target="#profile-content" hx-get="{% url 'sort_profile' %}?sort=starred">Favorites first</a></li>
+        <li><a href="{% url 'sort_profile' %}?sort=newToOld" class="dropdown-item text-dark" hx-target="#profile-content" hx-get="{% url 'sort_profile' %}?sort=newToOld">Newest to oldest</a></li>
+        <li><a href="{% url 'sort_profile' %}?sort=OldToNew" class="dropdown-item text-dark" hx-target="#profile-content" hx-get="{% url 'sort_profile' %}?sort=OldToNew" >Oldest to newest</a></li>
+    </ul>
+</div>
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    {% for creation_info in creation_infos %}
+        <div class="col mb-4">
+            <div class="card text-center">
+                
+                <img src="{{ creation_info.image_file.url }}" alt="Uploaded Image" class="card-img-top" style="max-width: 100%; height: auto;">
+
+                <div class="card-body">
+                    <audio controls class="w-100"> 
+                        <source src="{{ creation_info.sound_file.url }}" type="audio/mp3">
+                        Your browser does not support the audio tag.
+                    </audio>
+                    <span>Created on {{ creation_info.created_date }}</span>
+                </div>
+                {% csrf_token %}
+                <div class="card-footer">
+                    <i class="bi bi-trash3 text-dark" style="cursor:pointer;" hx-target="#profile-content" hx-confirm="Are you sure you wish to delete?" hx-post="{% url 'delete_creation' %}" hx-vals='{"creation_id": "{{ creation_info.id }}", "csrfmiddlewaretoken": "{{ csrf_token }}" }'></i>
+
+                    {% if creation_info.starred %}
+                    <i class="bi bi-heart-fill text-dark" style="cursor:pointer;" hx-target="#profile-content" hx-post="{% url 'heart_creation' %}" hx-vals='{"creation_id": "{{ creation_info.id }}", "csrfmiddlewaretoken": "{{ csrf_token }}" }'></i>
+                    
+                    {% else %}
+                
+                    <i class="bi bi-heart text-dark" style="cursor:pointer;" hx-target="#profile-content" hx-post="{% url 'heart_creation' %}" hx-vals='{"creation_id": "{{ creation_info.id }}", "csrfmiddlewaretoken": "{{ csrf_token }}" }'></i>
+
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+
+</div>
+{% else %}
+    <p class="text-center"> No creations yet. </p>
+{% endif %}

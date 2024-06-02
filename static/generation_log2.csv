@@ -1,0 +1,5 @@
+Keywords,Method,Duration (seconds),Average Duration
+['Umbrella', 'Dog', 'Toilet', 'Frog', 'glass_breaking', 'Cat', 'water_drops', 'Tin can', 'Car', 'Sheep'],Plain,30,12.63107078075409
+['Umbrella', 'Dog', 'Toilet', 'Frog', 'glass_breaking', 'Cat', 'water_drops', 'Tin can', 'Car', 'Sheep'],Creative,30,12.557115173339843
+['Umbrella', 'Dog', 'Toilet', 'Frog', 'glass_breaking', 'Cat', 'water_drops', 'Tin can', 'Car', 'Sheep', 'hand_saw', 'cow', 'airplane', 'hen', 'washing_machine', 'snoring', 'footsteps', 'engine', 'mouse_click', 'breathing'],Plain,30,20.949431800842284
+['Umbrella', 'Dog', 'Toilet', 'Frog', 'glass_breaking', 'Cat', 'water_drops', 'Tin can', 'Car', 'Sheep', 'hand_saw', 'cow', 'airplane', 'hen', 'washing_machine', 'snoring', 'footsteps', 'engine', 'mouse_click', 'breathing'],Creative,30,20.652524018287657

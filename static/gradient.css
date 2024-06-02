@@ -1,0 +1,39 @@
+.gradient-custom {
+    /* fallback for old browsers */
+    background: #eff0f5;
+    
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: -webkit-linear-gradient(to right, rgba(239,240,245,0.5), rgba(163,148,179,0.5));
+
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient(to right, rgba(239,240,245,0.5), rgba(163,148,179,0.5))
+}
+.mask-custom {
+    background: rgba(24, 24, 16, .2);
+    border-radius: 2em;
+    backdrop-filter: blur(15px);
+    border: 2px solid rgba(255, 255, 255, 0.05);
+    background-clip: padding-box;
+    box-shadow: 10px 10px 10px rgba(46, 54, 68, 0.03);
+}
+
+/* Make circles that indicate the steps of the form: */
+.step {
+    height: 15px;
+    width: 15px;
+    margin: 0 2px;
+    background-color: #bbbbbb;
+    border: none;  
+    border-radius: 50%;
+    display: inline-block;
+    opacity: 0.5;
+  }
+  
+  .step.active {
+    opacity: 1;
+  }
+  
+  /* Mark the steps that are finished and valid: */
+  .step.finish {
+    background-color: #aa049c;
+  }

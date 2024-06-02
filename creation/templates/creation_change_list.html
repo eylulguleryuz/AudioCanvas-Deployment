@@ -1,0 +1,65 @@
+{% extends "admin/change_list.html" %}
+
+{% block content_title %}
+    <h1> Keyword Stats </h1>
+{% endblock %}
+
+{% block result_list %}
+<div class="results">
+
+    <canvas id="wordcloud" width="600" height="400"></canvas>
+
+    <table>
+
+    <thead>
+      <tr>
+        <th>
+          <div class="text">
+            <a href="#">Keyword</a>
+          </div>
+        </th>
+        <th>
+          <div class="text">
+            <a href="#">Count</a>
+          </div>
+        </th>
+        <tr>
+    </thead>
+
+    <tbody>
+      {% for row in popular_keywords %}
+      <tr class="{% cycle 'row1' 'row2' %}">
+        <td> {{ row.keyword }} </td>   
+        <td> {{ row.total_count }} </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+
+  </table>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/wordcloud2.js/1.0.6/wordcloud2.min.js"></script>
+<script>
+    var popularKeywords = [
+        {% for row in popular_keywords %}
+            ["{{ row.keyword }}", {{ row.total_count|default_if_none:"0" }}],
+        {% endfor %}
+            ];
+    
+    WordCloud(document.getElementById('wordcloud'), {
+        list: popularKeywords,
+        gridSize: 12,
+        weightFactor: 30,
+        color: 'random-dark',
+        rotateRatio: 0.5,
+        shape: 'square',
+
+        fontSize: function(word, size) {
+            return size * 5;  
+        }
+    });
+</script>
+
+{% endblock %}
+
+{% block pagination %}{% endblock %}

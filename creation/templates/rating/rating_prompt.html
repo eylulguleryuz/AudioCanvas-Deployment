@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<head>
+    <script src={% static "rating.js"%}></script>
+</head>
+
+<section>
+<div class="toast-container position-fixed bottom-50 start-50 translate-middle-x p-3">
+    {% csrf_token %}
+    <div id="confirmationToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+            <strong class="me-auto">Rating</strong>
+            <button type="button" class="btn-close" id="btn-close" onclick="foo(this);" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">
+            Would you mind rating this sound?
+            <span id="rating" data-creation-info-id="{{ creation_info.id }}" data-csrf-token="{{ csrf_token }}">
+            </span>
+        </div>
+        
+    </div>
+</div>
+
+</section>
+<section>
+<div class="toast-container position-fixed bottom-50 start-50 translate-middle-x p-3">
+    <div id="thankYouToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+            <strong class="me-auto">Thank You</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">
+            Your feedback has been recorded. Redirecting you back to the home page.
+          </div>
+    </div>
+</div>
+</section>
+{% endblock content %}

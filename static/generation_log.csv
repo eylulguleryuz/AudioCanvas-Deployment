@@ -1,0 +1,35 @@
+Keywords,Method,Duration (seconds),Average Duration
+['Umbrella'],Plain,30,1.0828813314437866
+['Umbrella'],Creative,30,1.4736300945281982
+['Dog'],Plain,30,1.3167812824249268
+['Dog'],Creative,30,1.8081345796585082
+['Toilet'],Plain,30,1.1021024942398072
+['Toilet'],Creative,30,1.5438452243804932
+['Frog'],Plain,30,1.1393451929092406
+['Frog'],Creative,30,1.5585597991943358
+['Beetle'],Plain,30,0.0029186725616455076
+['Beetle'],Creative,30,0.0028465747833251952
+['Umbrella', 'Dog'],Plain,30,2.1454224586486816
+['Umbrella', 'Dog'],Creative,30,2.4979281425476074
+['Toilet', 'Frog'],Plain,30,1.971285629272461
+['Toilet', 'Frog'],Creative,30,2.33239209651947
+['Beetle', 'Cat'],Plain,30,1.2390949010849
+['Beetle', 'Cat'],Creative,30,1.729688858985901
+['water_drops', 'Tin can'],Plain,30,3.2698109626770018
+['water_drops', 'Tin can'],Creative,30,3.824676513671875
+['Car', 'Sheep'],Plain,30,2.136656093597412
+['Car', 'Sheep'],Creative,30,2.6273135900497437
+['Umbrella', 'Dog', 'Toilet', 'Frog', 'Beetle'],Plain,30,3.843635845184326
+['Umbrella', 'Dog', 'Toilet', 'Frog', 'Beetle'],Creative,30,4.350534462928772
+['Cat', 'water_drops', 'Tin can', 'Car', 'Sheep'],Plain,30,6.313845586776734
+['Cat', 'water_drops', 'Tin can', 'Car', 'Sheep'],Creative,30,6.50092830657959
+['Clapping', 'Laughing', 'Umbrella', 'Dog', 'Toilet'],Plain,30,4.814635682106018
+['Clapping', 'Laughing', 'Umbrella', 'Dog', 'Toilet'],Creative,30,5.407133746147156
+['Frog', 'Beetle', 'Cat', 'water_drops', 'Tin can'],Plain,30,5.219237041473389
+['Frog', 'Beetle', 'Cat', 'water_drops', 'Tin can'],Creative,30,5.532728433609009
+['Car', 'Sheep', 'Clapping', 'Laughing', 'Umbrella'],Plain,30,4.880135178565979
+['Car', 'Sheep', 'Clapping', 'Laughing', 'Umbrella'],Creative,30,5.4578760147094725
+['Umbrella', 'Dog', 'Toilet', 'Frog', 'Beetle', 'Cat', 'water_drops', 'Tin can', 'Car', 'Sheep'],Plain,30,9.7822585105896
+['Umbrella', 'Dog', 'Toilet', 'Frog', 'Beetle', 'Cat', 'water_drops', 'Tin can', 'Car', 'Sheep'],Creative,30,10.484667372703552
+['Clapping', 'Laughing', 'Umbrella', 'Dog', 'Toilet', 'Frog', 'Beetle', 'Cat', 'water_drops', 'Tin can'],Plain,30,10.74642081260681
+['Clapping', 'Laughing', 'Umbrella', 'Dog', 'Toilet', 'Frog', 'Beetle', 'Cat', 'water_drops', 'Tin can'],Creative,30,10.710176491737366

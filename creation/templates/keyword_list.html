@@ -1,0 +1,23 @@
+{% if not keywords %}
+   <p> No objects were detected. Please add some or start over before you continue.</p>     
+{% endif %}
+{% if keywords %}
+<p> Identified objects: </p>
+{% for keyword, count in keywords.items %}
+
+<ul class="list-group">
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+        {{ count }} {{ keyword }}
+        <span class="badge badge-danger badge-pill"
+        style="cursor:pointer;"
+        hx-get="{% url 'delete_keyword' %}"
+        hx-vals='{"keyword": "{{ keyword }}"}'
+        hx-target="#keyword-list">del</span>
+    </li>
+</ul>
+{% endfor %}
+{% endif %}
+
+<section class>
+    {% include 'search/search.html' %}
+</section>

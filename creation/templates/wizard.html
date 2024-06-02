@@ -1,0 +1,169 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load i18n %}
+{% load static %}
+
+{% block head %}
+{{ wizard.form.media }}
+
+{% endblock %}
+
+{% block content %}
+<head>
+    <link rel="stylesheet" href={% static "gradient.css"%}>
+    <script>
+        function redirectToProfile() {
+        window.location.href = "{% url 'profile' %}";
+        }
+    </script>
+</head>
+  <section>
+
+    <div class="container py-5 p-5">
+      <div class="row">
+        <div class="col-md-6 col-lg-7 col-xl-7">
+          <div class="drop-area" id="dropArea">
+            <p class="h5 mb-3 font-weight-normal" style="font-family: 'Segoe Script' !important;">Step {{ wizard.steps.step1 }} of {{ wizard.steps.count }}</p>
+            <div>
+              {% for step in wizard.steps.all %}
+              <span class="step{% if step == wizard.steps.current %} active{% endif %}{% if step.is_complete %} finish{% endif %}"></span>
+              {% endfor %}
+            </div>
+            <hr>
+            
+            <form class="form-floating" enctype="multipart/form-data" method="post">{% csrf_token %}
+            <table>
+              {{ wizard.management_form }}
+              {% if wizard.form.forms %}
+                  {{ wizard.form.management_form }}
+                  {% for form in wizard.form.forms %}
+                      {{ form|crispy}}
+                  {% endfor %}
+              {% else %}
+                  {{ wizard.form|crispy }}
+              {% endif %}
+
+              {% if wizard.steps.index == 1%}
+              <section id="keyword-list" class="justify-content-end">
+                {% include 'keyword_list.html' %}
+              </section>
+              {% endif%}
+
+            {% if wizard.steps.index == 3 and sound_data %}
+                <P> Generated sound: </p>
+                  <audio controls>
+                    <source src="data:audio/mp3;base64,{{ sound_data }}" type="audio/mp3">
+                    Your browser does not support the audio tag.
+                </audio>
+            {% endif %}
+            {% if wizard.steps.index == 3 and error_message %}
+              <div class="alert alert-warning" role="alert">
+                <strong>Error:</strong> {{error_message}}
+              </div>
+            {% elif wizard.steps.index == 3 and not error_message and not sound_data%}
+              <div class="alert alert-warning" role="alert">
+                <strong>Error:</strong> There was a problem generating the sound. Please ensure that the objects/keywords list in the step 2 is not empty.
+              </div>
+            {% endif %}
+            </table>
+            <div class="mt-3">
+            </div>
+            {% if wizard.steps.prev and wizard.steps.index != 2%}
+              <button class="btn btn-lg btn-dark btn-block" name="wizard_goto_step" type="submit" value="{{ wizard.steps.first }}">{% translate "Start over" %}</button>
+            
+                {% if wizard.steps.next %}
+                    <input class="btn btn-lg btn-dark btn-block" type="submit" value="{% translate "Next" %}"/>
+                {% else %}
+                    {% if sound_data%}
+                    <button class="btn btn-lg btn-dark btn-block" name="wizard_goto_step" type="submit" value="{{ wizard.steps.prev }}">{% translate "Regenerate" %}</button>
+            
+                    <input class="btn btn-lg btn-dark btn-block" type="submit" value="{% translate "Save to collection" %}"/>
+                    {% endif%}
+                {% endif %}
+            {% else %}
+
+                <input class="btn btn-lg btn-dark btn-block" type="submit" value="{% translate "Next" %}"/>
+            {% endif %}
+            
+            </form>
+            <div class="container mt-4">
+              <div class="row">
+                  {% if wizard.steps.index == 3 %}
+                      <div class="col-md-6">
+                          <div class="card">
+                              <div class="card-body">
+                                  <p class="card-title">Used labels:</p>
+                                  <ul class="list-group list-group-flush">
+                                      {% for label in used_labels %}
+                                          <li class="list-group-item">{{ label }}</li>
+                                      {% endfor %}
+                                  </ul>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <p class="card-title">Unused labels:</p>
+                                <ul class="list-group list-group-flush">
+                                    {% for label in unused_labels %}
+                                        <li class="list-group-item">{{ label }}</li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                  {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-5 col-xl-5 mb-4 mb-md-0">
+  
+          <h5 class="font-weight-bold mb-3 text-center" >Your recent creations</h5>
+  
+          <div class="card mask-custom">
+            <button type="button" class="btn btn-light float-end" onclick="redirectToProfile()">
+              See all
+            </button>
+            <div class="card-body">
+              {% if creation_infos %}
+              <ul class="list-unstyled mb-0">
+                
+                {% for creation_info in creation_infos%}
+                  {% if forloop.counter <= 3 %}
+                  <li class="p-2 border-bottom" style="border-bottom: 1px solid rgba(255,255,255,.3);">
+                      <div class="d-flex flex-row align-items-center">
+                        <img src="{{ creation_info.image_file.url }}"  alt="latest creations"
+                          class="d-flex align-self-center me-3 shadow-1-strong" width="100">
+                        <div>
+                          <audio controls style=" max-width: 100%; display: block;">
+                            <source src="{{ creation_info.sound_file.url }}" type="audio/mp3">
+                            Your browser does not support the audio tag.
+                        </audio>
+                        <p class="small text-white mb-1">Created on {{ creation_info.created_date }}</p>
+                      </div>
+                    </div>
+                </li>
+                {% endif %}
+                {% endfor %}
+               
+              </ul>
+              {% else %}
+              <div class="d-flex flex-row">
+                <p> You haven't created any yet. </p>
+              </div>
+              {% endif %}
+            </div>
+          </div>
+  
+        </div>
+      </div>
+  
+    </div>
+  </section>
+
+{% endblock %}
+
+  

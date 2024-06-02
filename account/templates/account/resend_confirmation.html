@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+<style type="text/css">
+  .form-signin {
+  width: 100%;
+  max-width: 330px;
+  padding: 15px;
+  margin: auto;
+  }
+
+  .form-signin .form-control {
+    position: relative;
+    box-sizing: border-box;
+    height: auto;
+    padding: 10px;
+    font-size: 16px;
+  }
+  .form-signin .form-control:focus {
+    z-index: 2;
+  }
+  .form-signin input[type="email"] {
+    margin-bottom: -1px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+
+  .h3{
+    text-align: center;
+  }
+</style>
+
+
+<form class="form-signin" method="post">{% csrf_token %}
+
+  <h1 class="h3 mb-3 font-weight-normal">Resend Confirmation</h1>
+  <div class="form-floating mb-3">
+    <input type="email" name="email" class="form-control" id="floatingInput" placeholder="name@example.com" required autofocus>
+    <label for="floatingInput">Email address</label>
+  </div>
+  {% for field in activation_form %}
+      <p>
+        {% for error in field.errors %}
+          <p style="color: red">{{ error }}</p>
+        {% endfor %}
+      </p>
+  {% endfor %}
+  {% if activation_form.non_field_errors %}
+    <div style="color: red">
+      <p>{{activation_form.non_field_errors}}</p>
+    </div>
+      
+  {% endif %}
+
+  <button class="btn btn-lg btn-dark btn-block" type="submit">Resend</button>
+
+</form>
+
+
+{% endblock content %}
+

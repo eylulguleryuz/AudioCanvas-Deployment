@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<style>
+    .card {
+        transition: box-shadow 0.3s ease;
+        border: 1px solid transparent; /* Set initial border */
+    }
+
+    .card:hover {
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.3); /* Add box shadow on hover */
+        border-color: rgba(0, 0, 0, 0.1); /* Change border color on hover */
+    }
+</style>
+<div class="container mb-4 p-5">
+    <h4 class= "text-center">Your Collection</h4>
+    <hr>
+    <section id="profile-content">
+    {% include 'profile/profile_partial.html' %}
+    </section>
+</div>
+
+{% endblock content %}

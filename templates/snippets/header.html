@@ -1,0 +1,56 @@
+{% load static %}
+
+<head>
+	<link rel="stylesheet" href={% static "header.css"%}>
+  
+  </head>
+  <div>
+    <!-- Header -->
+    <nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{% url 'home' %}">AudioCanvas</a>
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 ">
+                {% if request.path == '/logged_in/' %}
+                <li>Hello, {{ request.user.username }}. What are we creating today?</li>
+                {% endif %}
+            </ul>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 "></ul>
+                <ul class="navbar-nav ms-auto">
+                    {% if request.user.is_authenticated %}
+                        {% if user.is_superuser %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'admin:index' %}">Admin</a>
+                        <li class="nav-item">
+                            <a class="nav-link purple-btn" href="{% url 'accountdetails' %}">Account</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                        </li>
+                        {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link purple-btn" href="{% url 'accountdetails' %}">Account</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                        </li>
+                        {% endif %}
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link purple-btn" href="{% url 'login' %}">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'register' %}">Register</a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>
+<!-- End Header -->

@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<style type="text/css">
+  .form-signin {
+  width: 100%;
+  max-width: 330px;
+  padding: 15px;
+  margin: auto;
+  }
+
+  .form-signin .form-control {
+    position: relative;
+    box-sizing: border-box;
+    height: auto;
+    padding: 10px;
+    font-size: 16px;
+  }
+  .form-signin .form-control:focus {
+    z-index: 2;
+  }
+  .form-signin input[type="email"] {
+    margin-bottom: 10px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+  .form-signin input[type="text"] {
+    margin-bottom: 10px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+  .form-signin input[type="password"] {
+    margin-bottom: -1px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
+
+  .h3{
+    text-align: center;
+  }
+
+</style>
+
+
+<form class="form-signin" method="post">{% csrf_token %}
+
+  <h1 class="h3 mb-3 font-weight-normal">Register</h1>
+  <div class="form-floating mb-3">
+    <input type="email" name="email" class="form-control" id="inputEmail" placeholder="name@example.com" required autofocus>
+    <label for="inputEmail">Email address</label>
+  </div>
+  <div class="form-floating mb-3">
+    <input type="text" name="username" class="form-control" id="inputUsername" placeholder="username" required>
+    <label for="inputUsername">Username</label>
+  </div>
+  <div class="form-floating">
+    <input type="password"  name="password1" class="form-control" id="inputPassword1" placeholder="Password" required>
+    <label for="inputPassword1">Password</label>
+  </div>
+  <div class="form-floating">
+    <input type="password"  name="password2" class="form-control" id="inputPassword2" placeholder="Password" required>
+    <label for="inputPassword2">Password (again)</label>
+  </div>
+
+  {% for field in registration_form %}
+      <p>
+        {% for error in field.errors %}
+          <p style="color: red">{{ error }}</p>
+        {% endfor %}
+      </p>
+  {% endfor %}
+  {% if registration_form.non_field_errors %}
+    <div style="color: red">
+      <p>{{registration_form.non_field_errors}}</p>
+    </div>
+      
+  {% endif %}
+
+  <button class="btn btn-lg btn-dark btn-block" type="submit">Register</button>
+
+</form>
+
+<p style="text-align: center;"> <br>Your password should: <br><br>
+  •	Be at least 8 characters<br>
+  •	Be a combination of letters and numbers<br>
+  •	Not be a common password
+</p> 
+
+
+{% endblock content %}
+
+
